@@ -26,7 +26,7 @@ const ColorList = ({ colors, updateColors, logout }) => {
       ? axiosWithAuth()
           .put(`/colors/${colorToEdit.id}`, colorToEdit)
           .then(res => {
-            console.log(res);
+            console.log("jp: edit line 29 in ColorList.js", res);
             updateColors(
               colors.map(color =>
                 color.id === colorToEdit.id ? colorToEdit : color
@@ -38,6 +38,7 @@ const ColorList = ({ colors, updateColors, logout }) => {
       : axiosWithAuth()
           .post(`/colors`, colorToEdit)
           .then(res => {
+            console.log("jp: add line 42 in ColorList.js", res)
             updateColors(res.data);
             setColorToEdit(initialColor);
           });
@@ -47,13 +48,14 @@ const ColorList = ({ colors, updateColors, logout }) => {
     axiosWithAuth()
       .delete(`/colors/${color.id}`)
       .then(res => {
-        console.log(res.data);
+        console.log("jp: line 51 in ColorList.js", res.data);
         updateColors(colors.filter(item => item.id !== res.data));
         setEditing(false);
         setColorToEdit(initialColor);
       });
   };
-  console.log({ colorToEdit });
+
+
   return (
     <div className="colors-wrap">
       <div className="button-row">
